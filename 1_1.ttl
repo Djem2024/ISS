@@ -1,0 +1,895 @@
+@prefix : <http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect/> .
+
+<http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect> rdf:type owl:Ontology ;
+                                                                     rdfs:comment """\"Dog Sport Connect\" is a social application that helps dog owners find sports venues, events, and like-minded individuals for joint training sessions. Using knowledge graphs, the application provides recommendations for choosing sports activities based on the dog's breed, age, and activity level. It also supports social connections between owners to share experiences, train together, and attend events.
+The application simplifies access to organized training sessions and venues, aiming to create a community of active dog owners who wish to improve their dogs' fitness and connect with other dog enthusiasts.""" .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#attends
+:attends rdf:type owl:ObjectProperty ,
+                  owl:AsymmetricProperty ,
+                  owl:IrreflexiveProperty ;
+         rdfs:domain :Dog ;
+         rdfs:range :Event .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hasInterestIn
+:hasInterestIn rdf:type owl:ObjectProperty ;
+               rdfs:domain :Owner ;
+               rdfs:range :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hasOwner
+:hasOwner rdf:type owl:ObjectProperty ,
+                   owl:FunctionalProperty ;
+          rdfs:domain :Dog ;
+          rdfs:range :Owner .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hosts
+:hosts rdf:type owl:ObjectProperty ;
+       rdfs:domain :Training_venue ;
+       rdfs:range :Event .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#isPartOf
+:isPartOf rdf:type owl:ObjectProperty ,
+                   owl:FunctionalProperty ,
+                   owl:AsymmetricProperty ,
+                   owl:IrreflexiveProperty ;
+          rdfs:domain :Event ;
+          rdfs:range :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#isSuitableForActivity
+:isSuitableForActivity rdf:type owl:ObjectProperty ;
+                       rdfs:domain :Dog ;
+                       rdfs:range :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#isTrainedBy
+:isTrainedBy rdf:type owl:ObjectProperty ;
+             rdfs:domain :Dog ;
+             rdfs:range :Trainer .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#organizedAt
+:organizedAt rdf:type owl:ObjectProperty ,
+                      owl:FunctionalProperty ,
+                      owl:InverseFunctionalProperty ;
+             rdfs:domain :Event ;
+             rdfs:range :Training_venue .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#ownsDog
+:ownsDog rdf:type owl:ObjectProperty ,
+                  owl:FunctionalProperty ,
+                  owl:InverseFunctionalProperty ,
+                  owl:AsymmetricProperty ;
+         rdfs:domain :Owner ;
+         rdfs:range :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#participatesIn
+:participatesIn rdf:type owl:ObjectProperty ;
+                rdfs:domain :Dog ;
+                rdfs:range :Sports_Activity ;
+                owl:propertyChainAxiom ( :ownsDog
+                                         :participatesIn
+                                       ) .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#providesTraining
+:providesTraining rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Trainer ;
+                  rdfs:range :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#supportsActivity
+:supportsActivity rdf:type owl:ObjectProperty ,
+                           owl:TransitiveProperty ;
+                  rdfs:domain :Training_venue ;
+                  rdfs:range :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#trainsAt
+:trainsAt rdf:type owl:ObjectProperty ;
+          rdfs:domain :Dog ;
+          rdfs:range :Training_venue .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hasAddress
+:hasAddress rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Owner ,
+                        :Trainer .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hasAge
+:hasAge rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Dog ,
+                    :Owner ,
+                    :Trainer .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hasBreedType
+:hasBreedType rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hasCapacity
+:hasCapacity rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Training_venue .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hasCertification
+:hasCertification rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Trainer .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hasContactInfo
+:hasContactInfo rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Owner ,
+                            :Trainer .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hasDate
+:hasDate rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Event .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hasDuration
+:hasDuration rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Event .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hasEquipment
+:hasEquipment rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Training_venue .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hasExperience
+:hasExperience rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Trainer .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hasGender
+:hasGender rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Dog ,
+                       :Owner ,
+                       :Trainer .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hasLocation
+:hasLocation rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Event ,
+                         :Training_venue .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hasMaxParticipants
+:hasMaxParticipants rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Event .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hasName
+:hasName rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Dog ,
+                     :Owner ,
+                     :Trainer .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hasOpeningHours
+:hasOpeningHours rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Training_venue .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hasRating
+:hasRating rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Trainer ,
+                       :Training_venue .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hasRegistrationFee
+:hasRegistrationFee rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Event .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hasSpecialization
+:hasSpecialization rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :Trainer .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hasType
+:hasType rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Event ,
+                     :Training_venue .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#hasWeight
+:hasWeight rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#isRecurring
+:isRecurring rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Event .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#isSuitableForAge
+:isSuitableForAge rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty ;
+                  rdfs:domain :Sports_Activity .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Agility
+:Agility rdf:type owl:Class ;
+         rdfs:subClassOf :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Akita
+:Akita rdf:type owl:Class ;
+       owl:equivalentClass [ owl:intersectionOf ( :Canicross
+                                                  :Carting
+                                                  :Hiking
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :isSuitableForActivity ;
+                                                    owl:someValuesFrom :Weight_Pulling
+                                                  ]
+                                                ) ;
+                             rdf:type owl:Class
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :isSuitableForActivity ;
+                             owl:someValuesFrom :Canicross
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :isSuitableForActivity ;
+                             owl:someValuesFrom :Carting
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :isSuitableForActivity ;
+                             owl:someValuesFrom :Hiking
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :isSuitableForActivity ;
+                             owl:someValuesFrom :Skijoring
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :isSuitableForActivity ;
+                             owl:someValuesFrom :Weight_Pulling
+                           ] ;
+       rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Alaskan_Malamute
+:Alaskan_Malamute rdf:type owl:Class ;
+                  owl:equivalentClass [ rdf:type owl:Restriction ;
+                                        owl:onProperty :isSuitableForActivity ;
+                                        owl:someValuesFrom :Canicross
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :isSuitableForActivity ;
+                                        owl:someValuesFrom :Carting
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :isSuitableForActivity ;
+                                        owl:someValuesFrom :Hiking
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :isSuitableForActivity ;
+                                        owl:someValuesFrom :Skijoring
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :isSuitableForActivity ;
+                                        owl:someValuesFrom :Weight_Pulling
+                                      ] ;
+                  rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Australian_Shepherd
+:Australian_Shepherd rdf:type owl:Class ;
+                     owl:equivalentClass [ rdf:type owl:Restriction ;
+                                           owl:onProperty :isSuitableForActivity ;
+                                           owl:someValuesFrom :Agility
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :isSuitableForActivity ;
+                                           owl:someValuesFrom :Dog_Parkour
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :isSuitableForActivity ;
+                                           owl:someValuesFrom :Dog_fitness
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :isSuitableForActivity ;
+                                           owl:someValuesFrom :Flyball
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :isSuitableForActivity ;
+                                           owl:someValuesFrom :Frisbee
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :isSuitableForActivity ;
+                                           owl:someValuesFrom :Herding
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :isSuitableForActivity ;
+                                           owl:someValuesFrom :Hiking
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :isSuitableForActivity ;
+                                           owl:someValuesFrom :Obedience
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :isSuitableForActivity ;
+                                           owl:someValuesFrom :Rally_Obedience
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :isSuitableForActivity ;
+                                           owl:someValuesFrom :Treibball
+                                         ] ;
+                     rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Basset_Hound
+:Basset_Hound rdf:type owl:Class ;
+              rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Beagle
+:Beagle rdf:type owl:Class ;
+        owl:equivalentClass [ rdf:type owl:Restriction ;
+                              owl:onProperty :isSuitableForActivity ;
+                              owl:someValuesFrom :Dog_fitness
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :isSuitableForActivity ;
+                              owl:someValuesFrom :Nosework
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :isSuitableForActivity ;
+                              owl:someValuesFrom :Obedience
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :isSuitableForActivity ;
+                              owl:someValuesFrom :Rally_Obedience
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :isSuitableForActivity ;
+                              owl:someValuesFrom :Tracking
+                            ] ;
+        rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Bernese_Mountain_Dog
+:Bernese_Mountain_Dog rdf:type owl:Class ;
+                      rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Bichon_Frise
+:Bichon_Frise rdf:type owl:Class ;
+              rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Bikejoring
+:Bikejoring rdf:type owl:Class ;
+            rdfs:subClassOf :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Border_Collie
+:Border_Collie rdf:type owl:Class ;
+               owl:equivalentClass [ rdf:type owl:Restriction ;
+                                     owl:onProperty :isSuitableForActivity ;
+                                     owl:someValuesFrom :Agility
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :isSuitableForActivity ;
+                                     owl:someValuesFrom :Bikejoring
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :isSuitableForActivity ;
+                                     owl:someValuesFrom :Canicross
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :isSuitableForActivity ;
+                                     owl:someValuesFrom :Dock_Diving
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :isSuitableForActivity ;
+                                     owl:someValuesFrom :Dog_Parkour
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :isSuitableForActivity ;
+                                     owl:someValuesFrom :Dog_fitness
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :isSuitableForActivity ;
+                                     owl:someValuesFrom :Flyball
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :isSuitableForActivity ;
+                                     owl:someValuesFrom :Frisbee
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :isSuitableForActivity ;
+                                     owl:someValuesFrom :Herding
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :isSuitableForActivity ;
+                                     owl:someValuesFrom :Hiking
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :isSuitableForActivity ;
+                                     owl:someValuesFrom :Nosework
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :isSuitableForActivity ;
+                                     owl:someValuesFrom :Obedience
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :isSuitableForActivity ;
+                                     owl:someValuesFrom :Rally_Obedience
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :isSuitableForActivity ;
+                                     owl:someValuesFrom :Skijoring
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :isSuitableForActivity ;
+                                     owl:someValuesFrom :Swimming
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :isSuitableForActivity ;
+                                     owl:someValuesFrom :Treibball
+                                   ] ;
+               rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Boston_Terrier
+:Boston_Terrier rdf:type owl:Class ;
+                rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Boxer
+:Boxer rdf:type owl:Class ;
+       rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Bull_Terrier
+:Bull_Terrier rdf:type owl:Class ;
+              rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Bulldog
+:Bulldog rdf:type owl:Class ;
+         rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Canicross
+:Canicross rdf:type owl:Class ;
+           rdfs:subClassOf :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Carting
+:Carting rdf:type owl:Class ;
+         rdfs:subClassOf :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Cavalier_King_Charles_Spaniel
+:Cavalier_King_Charles_Spaniel rdf:type owl:Class ;
+                               rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Charity_Event
+:Charity_Event rdf:type owl:Class ;
+               rdfs:subClassOf :Event .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Chihuahua
+:Chihuahua rdf:type owl:Class ;
+           rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Cocker_Spaniel
+:Cocker_Spaniel rdf:type owl:Class ;
+                rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Competition
+:Competition rdf:type owl:Class ;
+             rdfs:subClassOf :Event .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Dachshund
+:Dachshund rdf:type owl:Class ;
+           rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Dalmatian
+:Dalmatian rdf:type owl:Class ;
+           rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Doberman_Pinscher
+:Doberman_Pinscher rdf:type owl:Class ;
+                   rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Dock_Diving
+:Dock_Diving rdf:type owl:Class ;
+             rdfs:subClassOf :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Dog
+:Dog rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Dog_Parkour
+:Dog_Parkour rdf:type owl:Class ;
+             rdfs:subClassOf :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Dog_fitness
+:Dog_fitness rdf:type owl:Class ;
+             rdfs:subClassOf :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Event
+:Event rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#First-Time_Owner
+:First-Time_Owner rdf:type owl:Class ;
+                  rdfs:subClassOf :Owner .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Flyball
+:Flyball rdf:type owl:Class ;
+         rdfs:subClassOf :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#French_Bulldog
+:French_Bulldog rdf:type owl:Class ;
+                rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Frisbee
+:Frisbee rdf:type owl:Class ;
+         rdfs:subClassOf :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#German_Shepherd
+:German_Shepherd rdf:type owl:Class ;
+                 rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Golden_Retriever
+:Golden_Retriever rdf:type owl:Class ;
+                  owl:equivalentClass [ rdf:type owl:Restriction ;
+                                        owl:onProperty :isSuitableForActivity ;
+                                        owl:someValuesFrom :Dock_Diving
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :isSuitableForActivity ;
+                                        owl:someValuesFrom :Dog_fitness
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :isSuitableForActivity ;
+                                        owl:someValuesFrom :Frisbee
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :isSuitableForActivity ;
+                                        owl:someValuesFrom :Hiking
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :isSuitableForActivity ;
+                                        owl:someValuesFrom :Swimming
+                                      ] ;
+                  rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Great_Dane
+:Great_Dane rdf:type owl:Class ;
+            rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Greyhound
+:Greyhound rdf:type owl:Class ;
+           rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Herding
+:Herding rdf:type owl:Class ;
+         rdfs:subClassOf :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Hiking
+:Hiking rdf:type owl:Class ;
+        rdfs:subClassOf :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Irish_Setter
+:Irish_Setter rdf:type owl:Class ;
+              rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Jack_Russell_Terrier
+:Jack_Russell_Terrier rdf:type owl:Class ;
+                      rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Labrador_Retriever
+:Labrador_Retriever rdf:type owl:Class ;
+                    owl:equivalentClass [ rdf:type owl:Restriction ;
+                                          owl:onProperty :isSuitableForActivity ;
+                                          owl:someValuesFrom :Bikejoring
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :isSuitableForActivity ;
+                                          owl:someValuesFrom :Dock_Diving
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :isSuitableForActivity ;
+                                          owl:someValuesFrom :Flyball
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :isSuitableForActivity ;
+                                          owl:someValuesFrom :Hiking
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :isSuitableForActivity ;
+                                          owl:someValuesFrom :Lure_Coursing
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :isSuitableForActivity ;
+                                          owl:someValuesFrom :Nosework
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :isSuitableForActivity ;
+                                          owl:someValuesFrom :Swimming
+                                        ] ;
+                    rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Lure_Coursing
+:Lure_Coursing rdf:type owl:Class ;
+               rdfs:subClassOf :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Maltese
+:Maltese rdf:type owl:Class ;
+         rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Meetup
+:Meetup rdf:type owl:Class ;
+        rdfs:subClassOf :Event .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Multiple_Dog_Owner
+:Multiple_Dog_Owner rdf:type owl:Class ;
+                    rdfs:subClassOf :Owner .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Newfoundland
+:Newfoundland rdf:type owl:Class ;
+              rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Nosework
+:Nosework rdf:type owl:Class ;
+          rdfs:subClassOf :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Obedience
+:Obedience rdf:type owl:Class ;
+           rdfs:subClassOf :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Owner
+:Owner rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Pembroke_Welsh_Corgi
+:Pembroke_Welsh_Corgi rdf:type owl:Class ;
+                      rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Pomeranian
+:Pomeranian rdf:type owl:Class ;
+            rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Poodle
+:Poodle rdf:type owl:Class ;
+        rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Professional_Trainer_Owner
+:Professional_Trainer_Owner rdf:type owl:Class ;
+                            rdfs:subClassOf :Owner .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Pug
+:Pug rdf:type owl:Class ;
+     rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Rally_Obedience
+:Rally_Obedience rdf:type owl:Class ;
+                 rdfs:subClassOf :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Reactive_Dog_Owner
+:Reactive_Dog_Owner rdf:type owl:Class ;
+                    rdfs:subClassOf :Owner .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Rottweiler
+:Rottweiler rdf:type owl:Class ;
+            rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Saint_Bernard
+:Saint_Bernard rdf:type owl:Class ;
+               rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Samoyed
+:Samoyed rdf:type owl:Class ;
+         owl:equivalentClass [ rdf:type owl:Restriction ;
+                               owl:onProperty :isSuitableForActivity ;
+                               owl:someValuesFrom :Canicross
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :isSuitableForActivity ;
+                               owl:someValuesFrom :Carting
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :isSuitableForActivity ;
+                               owl:someValuesFrom :Hiking
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :isSuitableForActivity ;
+                               owl:someValuesFrom :Skijoring
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :isSuitableForActivity ;
+                               owl:someValuesFrom :Weight_Pulling
+                             ] ;
+         rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Seminar
+:Seminar rdf:type owl:Class ;
+         rdfs:subClassOf :Event .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Shiba_Inu
+:Shiba_Inu rdf:type owl:Class ;
+           rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Shih_Tzu
+:Shih_Tzu rdf:type owl:Class ;
+          rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Siberian_Husky
+:Siberian_Husky rdf:type owl:Class ;
+                owl:equivalentClass [ rdf:type owl:Restriction ;
+                                      owl:onProperty :isSuitableForActivity ;
+                                      owl:someValuesFrom :Bikejoring
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :isSuitableForActivity ;
+                                      owl:someValuesFrom :Canicross
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :isSuitableForActivity ;
+                                      owl:someValuesFrom :Carting
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :isSuitableForActivity ;
+                                      owl:someValuesFrom :Hiking
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :isSuitableForActivity ;
+                                      owl:someValuesFrom :Skijoring
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :isSuitableForActivity ;
+                                      owl:someValuesFrom :Weight_Pulling
+                                    ] ;
+                rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Skijoring
+:Skijoring rdf:type owl:Class ;
+           rdfs:subClassOf :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Special_Needs_Dog_Owner
+:Special_Needs_Dog_Owner rdf:type owl:Class ;
+                         rdfs:subClassOf :Owner .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Sports_Activity
+:Sports_Activity rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Sports_Enthusiast_Owner
+:Sports_Enthusiast_Owner rdf:type owl:Class ;
+                         rdfs:subClassOf :Owner .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Swimming
+:Swimming rdf:type owl:Class ;
+          rdfs:subClassOf :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Tracking
+:Tracking rdf:type owl:Class ;
+          rdfs:subClassOf :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Trainer
+:Trainer rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Training_Session
+:Training_Session rdf:type owl:Class ;
+                  rdfs:subClassOf :Event .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Training_venue
+:Training_venue rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Treibball
+:Treibball rdf:type owl:Class ;
+           rdfs:subClassOf :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Vizsla
+:Vizsla rdf:type owl:Class ;
+        rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Weight_Pulling
+:Weight_Pulling rdf:type owl:Class ;
+                rdfs:subClassOf :Sports_Activity .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Weimaraner
+:Weimaraner rdf:type owl:Class ;
+            rdfs:subClassOf :Dog .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#Workshop
+:Workshop rdf:type owl:Class ;
+          rdfs:subClassOf :Event .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DosSportConnect#half-breed
+:half-breed rdf:type owl:Class ;
+            rdfs:subClassOf :Dog .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi

@@ -1,0 +1,1171 @@
+@prefix : <http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/> .
+
+<http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect> rdf:type owl:Ontology ;
+                                                                     rdfs:comment "The ontology will describe dog sports activities and social interactions, including venues, sports types, events, and relationships between owners." ;
+                                                                     rdfs:label "The \"Dod Sport Connect\" ontology" .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect#cooperatesWith
+:cooperatesWith rdf:type owl:ObjectProperty ,
+                         owl:SymmetricProperty ;
+                rdfs:domain :Owner ;
+                rdfs:range :Trainer ;
+                rdfs:comment "Indicates that the owner works with a specific trainer" ;
+                rdfs:label "cooperatesWith" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect#ownerAttends
+:ownerAttends rdf:type owl:ObjectProperty ;
+              owl:propertyChainAxiom ( :attends
+                                     ) ,
+                                     ( :hasOwner
+                                     ) ;
+              rdfs:comment "Indicats that owner attends the event" ;
+              rdfs:label "ownerAttends" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect#ownerParticipatesIn
+:ownerParticipatesIn rdf:type owl:ObjectProperty ;
+                     owl:propertyChainAxiom ( :hasOwner
+                                            ) ,
+                                            ( :participatesIn
+                                            ) ;
+                     rdfs:comment "Indicates that owner participates in the specific sport activity with his Dog" ;
+                     rdfs:label "ownerParticipatesIn" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect#ownerTrainedBy
+:ownerTrainedBy rdf:type owl:ObjectProperty ;
+                owl:propertyChainAxiom ( :hasOwner
+                                       ) ,
+                                       ( :isTrainedBy
+                                       ) ;
+                rdfs:comment "Indicates that the owner is trained along with his dog in specific skills by a specific trainer." ;
+                rdfs:label "ownerTrainedBy" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect#ownerTrainsAt
+:ownerTrainsAt rdf:type owl:ObjectProperty ;
+               owl:propertyChainAxiom ( :hasOwner
+                                      ) ,
+                                      ( :trainsAt
+                                      ) ;
+               rdfs:comment "Indicates that the owner along with his Dog trains at specific Venue" ;
+               rdfs:label "ownerTrainsAt" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/attends
+:attends rdf:type owl:ObjectProperty ,
+                  owl:AsymmetricProperty ,
+                  owl:IrreflexiveProperty ;
+         rdfs:domain :Dog ;
+         rdfs:range :Event ;
+         rdfs:comment "Indicates that an individual participates in an event or a training session." ;
+         rdfs:label "dogAttends" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hasInterestIn
+:hasInterestIn rdf:type owl:ObjectProperty ;
+               rdfs:domain :Owner ;
+               rdfs:range :Sports_Activity ;
+               rdfs:comment "Represents the interest of an individual in a specific sport or activity." ;
+               rdfs:label "hasInterestIn" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hasOwner
+:hasOwner rdf:type owl:ObjectProperty ,
+                   owl:AsymmetricProperty ;
+          rdfs:domain :Dog ;
+          rdfs:range :Owner ;
+          rdfs:comment "Indicates the ownership relation between a dog and its owner." ;
+          rdfs:label "hasOwner" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hosts
+:hosts rdf:type owl:ObjectProperty ;
+       rdfs:domain :Training_venue ;
+       rdfs:range :Event ;
+       rdfs:comment "Represents an entity hosting a specific event or activity." ;
+       rdfs:label "hosts" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/isAlsoTrainer
+:isAlsoTrainer rdf:type owl:ObjectProperty ,
+                        owl:SymmetricProperty ;
+               rdfs:domain :Owner ;
+               rdfs:range :Trainer ;
+               rdfs:comment "Indicates that an individual also serves as a trainer, aside from their primary role." ;
+               rdfs:label "isAlsoTrainer" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/isPartOf
+:isPartOf rdf:type owl:ObjectProperty ,
+                   owl:FunctionalProperty ,
+                   owl:AsymmetricProperty ,
+                   owl:IrreflexiveProperty ;
+          rdfs:domain :Event ;
+          rdfs:range :Sports_Activity ;
+          rdfs:comment "Shows that an entity is a part of a larger event or group." ;
+          rdfs:label "isPartOf" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/isSuitableForActivity
+:isSuitableForActivity rdf:type owl:ObjectProperty ;
+                       rdfs:domain :Dog ;
+                       rdfs:range :Sports_Activity ;
+                       rdfs:comment "Indicates whether a specific dog breed is suitable for a given sport or activity." ;
+                       rdfs:label "isSuitableForActivity" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/isTrainedBy
+:isTrainedBy rdf:type owl:ObjectProperty ;
+             rdfs:domain :Dog ;
+             rdfs:range :Trainer ;
+             rdfs:comment "Shows the relationship between a dog and its trainer." ;
+             rdfs:label "isTrainedBy" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/organizedAt
+:organizedAt rdf:type owl:ObjectProperty ,
+                      owl:FunctionalProperty ,
+                      owl:InverseFunctionalProperty ;
+             rdfs:domain :Event ;
+             rdfs:range :Training_venue ;
+             rdfs:comment "Indicates the venue where an event or training session is organized." ;
+             rdfs:label "organizedAt" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/ownsDog
+:ownsDog rdf:type owl:ObjectProperty ,
+                  owl:FunctionalProperty ,
+                  owl:InverseFunctionalProperty ,
+                  owl:AsymmetricProperty ;
+         rdfs:domain :Owner ;
+         rdfs:range :Dog ;
+         rdfs:comment "Represents the ownership relation from an owner's perspective." ;
+         rdfs:label "ownsDog" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/participatesIn
+:participatesIn rdf:type owl:ObjectProperty ;
+                rdfs:domain :Dog ;
+                rdfs:range :Sports_Activity ;
+                owl:propertyChainAxiom ( :ownsDog
+                                         :participatesIn
+                                       ) ;
+                rdfs:comment "Indicates that a dog or person participates in a particular sport or activity." ;
+                rdfs:label "participatesIn" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/providesTraining
+:providesTraining rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Trainer ;
+                  rdfs:range :Sports_Activity ;
+                  rdfs:comment "Shows that a trainer provides training in a specific sport or skill." ;
+                  rdfs:label "providesTraining" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/supportsActivity
+:supportsActivity rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Training_venue ;
+                  rdfs:range :Sports_Activity ;
+                  rdfs:comment "Indicates the support a venue or entity gives to a particular activity." ;
+                  rdfs:label "supportsActivity" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/trainsAt
+:trainsAt rdf:type owl:ObjectProperty ;
+          rdfs:domain :Dog ;
+          rdfs:range :Training_venue ;
+          rdfs:comment "Represents the relationship between a dog and the venue where training occurs." ;
+          rdfs:label "trainsAt" .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hasAddress
+:hasAddress rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
+            rdfs:domain :Owner ,
+                        :Trainer ;
+            rdfs:range xsd:string ;
+            rdfs:comment "Specifies the address of the owner or trainer." ,
+                         "hasAddress" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hasAge
+:hasAge rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Dog ,
+                    :Owner ,
+                    :Trainer ;
+        rdfs:range xsd:int ;
+        rdfs:comment "Indicates the age of the dog or trainer or owner." ,
+                     "hasAge" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hasBreedType
+:hasBreedType rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Dog ;
+              rdfs:range xsd:string ;
+              rdfs:comment "Defines the breed type of a dog." ,
+                           "hasBreedType" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hasCapacity
+:hasCapacity rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Training_venue ;
+             rdfs:range xsd:integer ;
+             rdfs:comment "Specifies the maximum capacity of a training venue." ,
+                          "hasCapacity" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hasCertification
+:hasCertification rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Trainer ;
+                  rdfs:range xsd:boolean ;
+                  rdfs:comment "Indicates certifications a trainer holds." ,
+                               "hasCertification" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hasContactInfo
+:hasContactInfo rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Owner ,
+                            :Trainer ;
+                rdfs:comment "Provides contact information for an owner or trainer." ,
+                             "hasContactInfo" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hasDate
+:hasDate rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Event ;
+         rdfs:range xsd:dateTime ;
+         rdfs:comment "Specifies the date of an event or training session." ,
+                      "hasDate" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hasDuration
+:hasDuration rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Event ;
+             rdfs:range xsd:integer ;
+             rdfs:comment "Indicates the duration of a training session or event." ,
+                          "hasDuration" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hasEquipment
+:hasEquipment rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Training_venue ;
+              rdfs:comment "Lists the equipment available for a training activity at the Venue" ,
+                           "hasEquipment" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hasExperience
+:hasExperience rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Trainer ;
+               rdfs:range xsd:integer ;
+               rdfs:comment "Represents the number of years of experience of a trainer." ,
+                            "hasExperience" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hasGender
+:hasGender rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Dog ,
+                       :Owner ,
+                       :Trainer ;
+           rdfs:range xsd:string ;
+           rdfs:comment "Indicates the gender of a dog or trainer or owner" ,
+                        "hasGender" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hasLocation
+:hasLocation rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Event ,
+                         :Training_venue ;
+             rdfs:range xsd:string ;
+             rdfs:comment "Provides information about the geographic location of a venue or event." ,
+                          "hasLocation" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hasMaxParticipants
+:hasMaxParticipants rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Event ;
+                    rdfs:range xsd:integer ;
+                    rdfs:comment "Defines the maximum number of participants allowed in an event or session." ,
+                                 "hasMaxParticipants" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hasName
+:hasName rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Dog ,
+                     :Event ,
+                     :Owner ,
+                     :Trainer ,
+                     :Training_venue ;
+         rdfs:range xsd:string ;
+         rdfs:comment "Indicates the name of an event, venue, or owner, or trainer, or a dog." ,
+                      "hasName" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hasOpeningHours
+:hasOpeningHours rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Training_venue ;
+                 rdfs:range xsd:dateTime ;
+                 rdfs:comment "Specifies the opening hours of a training venue." ,
+                              "hasOpeningHours" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hasRating
+:hasRating rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Trainer ,
+                       :Training_venue ;
+           rdfs:range xsd:decimal ;
+           rdfs:comment "Represents the rating of a trainer or venue." ,
+                        "hasRating" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hasRegistrationFee
+:hasRegistrationFee rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Event ;
+                    rdfs:range xsd:decimal ;
+                    rdfs:comment "Indicates the registration fee for participating in an event." ,
+                                 "hasRegistrationFee" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hasSpecialization
+:hasSpecialization rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :Trainer ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "Defines the area of specialization of a trainer." ,
+                                "hasSpecialization" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hasType
+:hasType rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Event ,
+                     :Training_venue ;
+         rdfs:range xsd:string ;
+         rdfs:comment "Indicates the type of event, venue." ,
+                      "hasType" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/hasWeight
+:hasWeight rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Dog ;
+           rdfs:range xsd:decimal ;
+           rdfs:comment "Specifies the weight of the dog." ,
+                        "hasWeight" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/isRecurring
+:isRecurring rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Event ;
+             rdfs:range xsd:boolean ;
+             rdfs:comment "isRecurring" ,
+                          "ndicates if an event or training session is recurring." .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/isSuitableForAge
+:isSuitableForAge rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty ;
+                  rdfs:domain :Sports_Activity ;
+                  rdfs:range xsd:integer ;
+                  rdfs:comment "Specifies whether an activity is suitable for a particular age range of dogs." ,
+                               "isSuitableForAge" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect#AgilityTrainers
+:AgilityTrainers rdf:type owl:Class ;
+                 owl:equivalentClass [ owl:intersectionOf ( :Agility
+                                                            :Trainer
+                                                          ) ;
+                                       rdf:type owl:Class
+                                     ] ;
+                 rdfs:subClassOf :Trainer .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect#BikejoringTrainers
+:BikejoringTrainers rdf:type owl:Class ;
+                    owl:equivalentClass [ owl:intersectionOf ( :Bikejoring
+                                                               :Skijoring
+                                                               :Trainer
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ;
+                    rdfs:subClassOf :Trainer .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect#CoursingTrainers
+:CoursingTrainers rdf:type owl:Class ;
+                  owl:equivalentClass [ owl:intersectionOf ( :Lure_Coursing
+                                                             :Trainer
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] ;
+                  rdfs:subClassOf :Trainer .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect#DogFitnessTrainers
+:DogFitnessTrainers rdf:type owl:Class ;
+                    owl:equivalentClass [ owl:intersectionOf ( :Dog_fitness
+                                                               :Trainer
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ;
+                    rdfs:subClassOf :Trainer .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect#FlyballTrainers
+:FlyballTrainers rdf:type owl:Class ;
+                 owl:equivalentClass [ owl:intersectionOf ( :Flyball
+                                                            :Trainer
+                                                          ) ;
+                                       rdf:type owl:Class
+                                     ] ;
+                 rdfs:subClassOf :Trainer .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect#FrisbeeTrainers
+:FrisbeeTrainers rdf:type owl:Class ;
+                 owl:equivalentClass [ owl:intersectionOf ( :Frisbee
+                                                            :Trainer
+                                                          ) ;
+                                       rdf:type owl:Class
+                                     ] ;
+                 rdfs:subClassOf :Trainer .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect#HerdingTrainers
+:HerdingTrainers rdf:type owl:Class ;
+                 owl:equivalentClass [ owl:intersectionOf ( :Herding
+                                                            :Trainer
+                                                            :Treibball
+                                                          ) ;
+                                       rdf:type owl:Class
+                                     ] ;
+                 rdfs:subClassOf :Trainer .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect#Indoor
+:Indoor rdf:type owl:Class ;
+        rdfs:subClassOf :Training_venue ;
+        rdfs:comment "Indicates that Training Venue is inside of the bilding" ;
+        rdfs:label "Indoor" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect#NoseworkTrainers
+:NoseworkTrainers rdf:type owl:Class ;
+                  owl:equivalentClass [ owl:intersectionOf ( :Nosework
+                                                             :Tracking
+                                                             :Trainer
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] ;
+                  rdfs:subClassOf :Trainer .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect#ObedienceTrainers
+:ObedienceTrainers rdf:type owl:Class ;
+                   owl:equivalentClass [ owl:intersectionOf ( :Obedience
+                                                              :Rally_Obedience
+                                                              :Trainer
+                                                            ) ;
+                                         rdf:type owl:Class
+                                       ] ;
+                   rdfs:subClassOf :Trainer .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect#OtherTrainers
+:OtherTrainers rdf:type owl:Class ;
+               owl:equivalentClass [ owl:intersectionOf ( :Canicross
+                                                          :Carting
+                                                          :Dock_Diving
+                                                          :Dog_Parkour
+                                                          :Hiking
+                                                          :Swimming
+                                                          :Trainer
+                                                          :Weight_Pulling
+                                                        ) ;
+                                     rdf:type owl:Class
+                                   ] ;
+               rdfs:subClassOf :Trainer .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect#Outdoor
+:Outdoor rdf:type owl:Class ;
+         rdfs:subClassOf :Training_venue ;
+         rdfs:comment "Indicates that Training Venue is outside." ;
+         rdfs:label "Outdoor" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Agility
+:Agility rdf:type owl:Class ;
+         rdfs:subClassOf :Sports_Activity ;
+         rdfs:comment "Represents a competitive sport where dogs navigate obstacle courses, testing their speed and coordination." ;
+         rdfs:label "Agility" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Akita
+:Akita rdf:type owl:Class ;
+       rdfs:subClassOf :Dog ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :isSuitableForActivity ;
+                         owl:someValuesFrom :Bikejoring
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :isSuitableForActivity ;
+                         owl:someValuesFrom :Carting
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :isSuitableForActivity ;
+                         owl:someValuesFrom :Dog
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :isSuitableForActivity ;
+                         owl:someValuesFrom :Skijoring
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :isSuitableForActivity ;
+                         owl:someValuesFrom :Weight_Pulling
+                       ] ;
+       rdfs:comment "A large breed known for its loyalty, originally from Japan, often used as a guard dog." ;
+       rdfs:label "Akita" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Alaskan_Malamute
+:Alaskan_Malamute rdf:type owl:Class ;
+                  rdfs:subClassOf :Dog ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :isSuitableForActivity ;
+                                    owl:someValuesFrom :Bikejoring
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :isSuitableForActivity ;
+                                    owl:someValuesFrom :Canicross
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :isSuitableForActivity ;
+                                    owl:someValuesFrom :Carting
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :isSuitableForActivity ;
+                                    owl:someValuesFrom :Skijoring
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :isSuitableForActivity ;
+                                    owl:someValuesFrom :Weight_Pulling
+                                  ] ;
+                  rdfs:comment "A strong working breed, ideal for pulling heavy loads, originally bred for Arctic conditions." ;
+                  rdfs:label "Alaskan Malamute" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Australian_Shepherd
+:Australian_Shepherd rdf:type owl:Class ;
+                     rdfs:subClassOf :Dog ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :isSuitableForActivity ;
+                                       owl:someValuesFrom :Agility
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :isSuitableForActivity ;
+                                       owl:someValuesFrom :Dog_fitness
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :isSuitableForActivity ;
+                                       owl:someValuesFrom :Flyball
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :isSuitableForActivity ;
+                                       owl:someValuesFrom :Frisbee
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :isSuitableForActivity ;
+                                       owl:someValuesFrom :Herding
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :isSuitableForActivity ;
+                                       owl:someValuesFrom :Hiking
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :isSuitableForActivity ;
+                                       owl:someValuesFrom :Nosework
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :isSuitableForActivity ;
+                                       owl:someValuesFrom :Obedience
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :isSuitableForActivity ;
+                                       owl:someValuesFrom :Rally_Obedience
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :isSuitableForActivity ;
+                                       owl:someValuesFrom :Treibball
+                                     ] ;
+                     rdfs:comment "An energetic herding breed known for its intelligence and versatility, commonly used in agility." ;
+                     rdfs:label "Australian Shepherd" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Basset_Hound
+:Basset_Hound rdf:type owl:Class ;
+              rdfs:subClassOf :Dog ;
+              rdfs:comment "A scent hound with an excellent sense of smell, often used for hunting small game." ;
+              rdfs:label "Basset Hound" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Beagle
+:Beagle rdf:type owl:Class ;
+        rdfs:subClassOf :Dog ;
+        rdfs:comment "A small, friendly breed with strong scenting capabilities, often used for tracking" ;
+        rdfs:label "Beagle" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Bernese_Mountain_Dog
+:Bernese_Mountain_Dog rdf:type owl:Class ;
+                      rdfs:subClassOf :Dog ;
+                      rdfs:comment "A large, gentle breed from Switzerland, known for its strength and good nature." ;
+                      rdfs:label "Bernese Mountain Dog" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Bichon_Frise
+:Bichon_Frise rdf:type owl:Class ;
+              rdfs:subClassOf :Dog ;
+              rdfs:comment "A small, cheerful companion dog, known for its hypoallergenic coat." ;
+              rdfs:label "Bichon Frise" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Bikejoring
+:Bikejoring rdf:type owl:Class ;
+            rdfs:subClassOf :Sports_Activity ;
+            rdfs:comment "Represents a sport involving a dog running alongside a cyclist, pulling them along trails." ;
+            rdfs:label "Bikejoring" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Border_Collie
+:Border_Collie rdf:type owl:Class ;
+               rdfs:subClassOf :Dog ;
+               rdfs:comment "A highly intelligent herding breed, renowned for its agility and ability to learn complex tasks." ;
+               rdfs:label "Border Collie" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Boston_Terrier
+:Boston_Terrier rdf:type owl:Class ;
+                rdfs:subClassOf :Dog ;
+                rdfs:comment "A small, friendly breed with a tuxedo-like coat, often kept as a companion." ;
+                rdfs:label "Boston Terrier" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Boxer
+:Boxer rdf:type owl:Class ;
+       rdfs:subClassOf :Dog ;
+       rdfs:comment "An energetic and playful breed, originally bred for hunting and working roles." ;
+       rdfs:label "Boxer" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Bull_Terrier
+:Bull_Terrier rdf:type owl:Class ;
+              rdfs:subClassOf :Dog ;
+              rdfs:comment "A distinctive breed known for its egg-shaped head and playful, loyal demeanor." ;
+              rdfs:label "Bull Terrier" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Bulldog
+:Bulldog rdf:type owl:Class ;
+         rdfs:subClassOf :Dog ;
+         rdfs:comment "A muscular breed with a characteristic wrinkled face, known for its calm temperament." ;
+         rdfs:label "Bulldog" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Canicross
+:Canicross rdf:type owl:Class ;
+           rdfs:subClassOf :Sports_Activity ;
+           rdfs:comment "Represents cross-country running with dogs, where the owner and dog are attached via a harness." ;
+           rdfs:label "Canicross" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Carting
+:Carting rdf:type owl:Class ;
+         rdfs:subClassOf :Sports_Activity ;
+         rdfs:comment "Represents an activity where dogs pull carts, often used by larger breeds." ;
+         rdfs:label "Carting" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Cavalier_King_Charles_Spaniel
+:Cavalier_King_Charles_Spaniel rdf:type owl:Class ;
+                               rdfs:subClassOf :Dog ;
+                               rdfs:comment "A friendly toy breed, often used as a lap dog and companion." ;
+                               rdfs:label "Cavalier King Charles Spaniel" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Charity_Event
+:Charity_Event rdf:type owl:Class ;
+               rdfs:subClassOf :Event ;
+               rdfs:comment "Represents an event organized to raise funds for a charitable cause related to dogs." ;
+               rdfs:label "Charity Event" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Chihuahua
+:Chihuahua rdf:type owl:Class ;
+           rdfs:subClassOf :Dog ;
+           rdfs:comment "The smallest breed, known for its confidence and attachment to owners." ;
+           rdfs:label "Chihuahua" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Cocker_Spaniel
+:Cocker_Spaniel rdf:type owl:Class ;
+                rdfs:subClassOf :Dog ;
+                rdfs:comment "A hunting and retrieving breed, known for its long, flowing ears and affectionate nature." ;
+                rdfs:label "Cocker Spaniel" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Competition
+:Competition rdf:type owl:Class ;
+             rdfs:subClassOf :Event ;
+             rdfs:comment "Represents a competitive event involving dogs, such as agility or obedience trials." ;
+             rdfs:label "Competition" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Dachshund
+:Dachshund rdf:type owl:Class ;
+           rdfs:subClassOf :Dog ;
+           rdfs:comment "small hound breed, originally bred for hunting burrowing animals, known for its elongated body." ;
+           rdfs:label "Dachshund" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Dalmatian
+:Dalmatian rdf:type owl:Class ;
+           rdfs:subClassOf :Dog ;
+           rdfs:comment "A distinct spotted breed, often known for its association with firefighting and as a carriage dog." ;
+           rdfs:label "Dalmatian" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Doberman_Pinscher
+:Doberman_Pinscher rdf:type owl:Class ;
+                   rdfs:subClassOf :Dog ;
+                   rdfs:comment "A sleek, alert breed, known for its protective instincts and intelligence, often used for guarding." ;
+                   rdfs:label "Doberman Pinscher" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Dock_Diving
+:Dock_Diving rdf:type owl:Class ;
+             rdfs:subClassOf :Sports_Activity ;
+             rdfs:comment "Represents a sport where dogs jump off a dock into water, competing for height or distance" ;
+             rdfs:label "Dock Diving" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Dog
+:Dog rdf:type owl:Class ;
+     rdfs:subClassOf [ rdf:type owl:Restriction ;
+                       owl:onProperty :hasOwner ;
+                       owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                       owl:onClass :Owner
+                     ] ;
+     rdfs:comment "Represents domestic canines of various breeds, owned as pets and trained for activities." ;
+     rdfs:label "Dogs" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Dog_Parkour
+:Dog_Parkour rdf:type owl:Class ;
+             rdfs:subClassOf :Sports_Activity ;
+             rdfs:comment "Represents a sport where dogs navigate urban obstacles, improving balance and agility." ;
+             rdfs:label "Dog Parkour" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Dog_fitness
+:Dog_fitness rdf:type owl:Class ;
+             rdfs:subClassOf :Sports_Activity ;
+             rdfs:comment "Represents general fitness activities designed to maintain a dog's health and physical condition." ;
+             rdfs:label "Dog Fitness" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Event
+:Event rdf:type owl:Class ;
+       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                         owl:onProperty :hosts ;
+                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onClass :Training_venue
+                       ] ;
+       rdfs:comment "Represents any organized gathering or activity involving dogs, such as competitions or training sessions.\"" ;
+       rdfs:label "Events" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/First-Time_Owner
+:First-Time_Owner rdf:type owl:Class ;
+                  rdfs:subClassOf :Owner ;
+                  rdfs:comment "Represents individuals who have recently become dog owners and may require additional guidance and resources" ;
+                  rdfs:label "First-Time Owner" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Flyball
+:Flyball rdf:type owl:Class ;
+         rdfs:subClassOf :Sports_Activity ;
+         rdfs:comment "Represents a team relay race for dogs involving hurdles and a ball-fetching mechanism." ;
+         rdfs:label "Flyball" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/French_Bulldog
+:French_Bulldog rdf:type owl:Class ;
+                rdfs:subClassOf :Dog ;
+                rdfs:comment "A small companion breed, known for its bat-like ears and playful personality." ;
+                rdfs:label "French Bulldog" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Frisbee
+:Frisbee rdf:type owl:Class ;
+         rdfs:subClassOf :Sports_Activity ;
+         rdfs:comment "Represents an activity where dogs catch a flying disc, often part of competitive disc dog events." ;
+         rdfs:label "Frisbee" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/German_Shepherd
+:German_Shepherd rdf:type owl:Class ;
+                 rdfs:subClassOf :Dog ;
+                 rdfs:comment "A versatile working breed, known for its intelligence, often used in police and rescue roles" ;
+                 rdfs:label "German Shepherd" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Golden_Retriever
+:Golden_Retriever rdf:type owl:Class ;
+                  rdfs:subClassOf :Dog ;
+                  rdfs:comment "A friendly and intelligent breed, often used for retrieving, assistance, and companionship." ;
+                  rdfs:label "Golden Retriever" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Great_Dane
+:Great_Dane rdf:type owl:Class ;
+            rdfs:subClassOf :Dog ;
+            rdfs:comment "One of the largest dog breeds, known for its gentle nature and majestic appearance." ;
+            rdfs:label "Great Dane" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Greyhound
+:Greyhound rdf:type owl:Class ;
+           rdfs:subClassOf :Dog ;
+           rdfs:comment "A fast breed, originally bred for hunting by sight, now popular in racing and as a pet.\"" ;
+           rdfs:label "Greyhound" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Herding
+:Herding rdf:type owl:Class ;
+         rdfs:subClassOf :Sports_Activity ;
+         rdfs:comment "Represents a working or sporting activity where dogs herd livestock, commonly seen with herding breeds." ;
+         rdfs:label "Herding" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Hiking
+:Hiking rdf:type owl:Class ;
+        rdfs:subClassOf :Sports_Activity ;
+        rdfs:comment "Represents long-distance walking with dogs, often on natural trails." ;
+        rdfs:label "Hiking" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Irish_Setter
+:Irish_Setter rdf:type owl:Class ;
+              rdfs:subClassOf :Dog ;
+              rdfs:comment "A sporting breed known for its beautiful red coat and energetic personality." ;
+              rdfs:label "Irish Setter" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Jack_Russell_Terrier
+:Jack_Russell_Terrier rdf:type owl:Class ;
+                      rdfs:subClassOf :Dog ;
+                      rdfs:comment "A small, energetic hunting breed, often used in agility and earthdog trials." ;
+                      rdfs:label "Jack Russell Terrier" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Labrador_Retriever
+:Labrador_Retriever rdf:type owl:Class ;
+                    rdfs:subClassOf :Dog ;
+                    rdfs:comment "A popular breed known for its friendly nature and versatility as a family pet, guide dog, or retriever." ;
+                    rdfs:label "Labrador Retriever" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Lure_Coursing
+:Lure_Coursing rdf:type owl:Class ;
+               rdfs:subClassOf :Sports_Activity ;
+               rdfs:comment "Represents a sport where dogs chase a mechanically operated lure, simulating a hunt." ;
+               rdfs:label "Lure Coursing" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Maltese
+:Maltese rdf:type owl:Class ;
+         rdfs:subClassOf :Dog ;
+         rdfs:comment "A toy breed, known for its long, silky white coat and affectionate demeanor." ;
+         rdfs:label "Maltese" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Meetup
+:Meetup rdf:type owl:Class ;
+        rdfs:subClassOf :Event ;
+        owl:disjointUnionOf ( :Charity_Event
+                              :Competition
+                              :Meetup
+                              :Seminar
+                              :Training_Session
+                              :Workshop
+                            ) ;
+        rdfs:comment "Represents a casual gathering of dog owners for socialization or recreational activities." ;
+        rdfs:label "Meetup" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Multiple_Dog_Owner
+:Multiple_Dog_Owner rdf:type owl:Class ;
+                    rdfs:subClassOf :Owner ;
+                    rdfs:comment "Represents owners who have more than one dog and may need support for managing a multi-dog household." ;
+                    rdfs:label "Multiple Dog Owner" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Newfoundland
+:Newfoundland rdf:type owl:Class ;
+              rdfs:subClassOf :Dog ;
+              rdfs:comment "A large working breed, known for its strength and swimming abilities, often used in water rescue." ;
+              rdfs:label "Newfoundland" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Nosework
+:Nosework rdf:type owl:Class ;
+          rdfs:subClassOf :Sports_Activity ;
+          rdfs:comment "Represents an activity where dogs use their sense of smell to locate hidden scents, often used for training or fun." ;
+          rdfs:label "Nosework" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Obedience
+:Obedience rdf:type owl:Class ;
+           rdfs:subClassOf :Sports_Activity ;
+           rdfs:comment "Represents a competitive sport that tests a dog's ability to follow commands accurately." ;
+           rdfs:label "Obedience" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Owner
+:Owner rdf:type owl:Class ;
+       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                         owl:onProperty :ownsDog ;
+                         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onClass :Dog
+                       ] ;
+       rdfs:comment "Represents individuals who own one or more dogs, responsible for their care and participation in activities." ;
+       rdfs:label "Owners" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Pembroke_Welsh_Corgi
+:Pembroke_Welsh_Corgi rdf:type owl:Class ;
+                      rdfs:subClassOf :Dog ;
+                      rdfs:comment "A herding breed, known for its short legs and friendly demeanor, originally bred for cattle herding." ;
+                      rdfs:label "Pembroke Welsh Corgi" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Pomeranian
+:Pomeranian rdf:type owl:Class ;
+            rdfs:subClassOf :Dog ;
+            rdfs:comment "A small companion breed, known for its fluffy coat and outgoing personality." ;
+            rdfs:label "Pomeranian" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Poodle
+:Poodle rdf:type owl:Class ;
+        rdfs:subClassOf :Dog ;
+        rdfs:comment "A highly intelligent breed that comes in multiple sizes, known for its hypoallergenic coat.\"" ;
+        rdfs:label "Poodle" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Professional_Trainer_Owner
+:Professional_Trainer_Owner rdf:type owl:Class ;
+                            rdfs:subClassOf :Owner ;
+                            rdfs:comment "Represents owners who are also professional dog trainers, with advanced training skills." ;
+                            rdfs:label "Professional Trainer Owner" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Pug
+:Pug rdf:type owl:Class ;
+     rdfs:subClassOf :Dog ;
+     rdfs:comment "A small breed with a wrinkled face and curled tail, known for its friendly and playful nature." ;
+     rdfs:label "Pug" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Rally_Obedience
+:Rally_Obedience rdf:type owl:Class ;
+                 rdfs:subClassOf :Sports_Activity ;
+                 rdfs:comment "Represents a sport combining traditional obedience commands with a sequence of activities." ;
+                 rdfs:label "Rally Obedience" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Reactive_Dog_Owner
+:Reactive_Dog_Owner rdf:type owl:Class ;
+                    rdfs:subClassOf :Owner ;
+                    rdfs:comment "Represents owners of dogs that exhibit reactive behaviors and may need specialized training or support." ;
+                    rdfs:label "Reactive Dog Owner" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Rottweiler
+:Rottweiler rdf:type owl:Class ;
+            rdfs:subClassOf :Dog ;
+            rdfs:comment "A strong working breed, originally used for herding and guarding, known for its loyalty." ;
+            rdfs:label "Rottweiler" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Saint_Bernard
+:Saint_Bernard rdf:type owl:Class ;
+               rdfs:subClassOf :Dog ;
+               rdfs:comment "A large breed, originally bred for rescue work in the Alps, known for its gentle nature." ;
+               rdfs:label "Saint Bernard" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Samoyed
+:Samoyed rdf:type owl:Class ;
+         rdfs:subClassOf :Dog ;
+         rdfs:comment "A fluffy white working breed, originally bred for herding and sledding, known for its friendly demeanor." ;
+         rdfs:label "Samoyed" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Seminar
+:Seminar rdf:type owl:Class ;
+         rdfs:subClassOf :Event ;
+         rdfs:comment "Represents an educational event where participants can learn more about dog training, health, or behavior." ;
+         rdfs:label "Seminar" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Shiba_Inu
+:Shiba_Inu rdf:type owl:Class ;
+           rdfs:subClassOf :Dog ;
+           rdfs:comment "A small, agile breed from Japan, known for its fox-like appearance and independence." ;
+           rdfs:label "Shiba Inu" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Shih_Tzu
+:Shih_Tzu rdf:type owl:Class ;
+          rdfs:subClassOf :Dog ;
+          rdfs:comment "A small breed, originally bred as a companion for Chinese royalty, known for its long flowing coat." ;
+          rdfs:label "Shih Tzu" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Siberian_Husky
+:Siberian_Husky rdf:type owl:Class ;
+                rdfs:subClassOf :Dog ;
+                rdfs:comment "A medium-sized working breed, known for its endurance and strength, often used for sledding." ;
+                rdfs:label "Siberian Husky" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Skijoring
+:Skijoring rdf:type owl:Class ;
+           rdfs:subClassOf :Sports_Activity ;
+           rdfs:comment "Represents a winter sport where a dog pulls a person on skis, requiring strength and coordination." ;
+           rdfs:label "Skijoring" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Special_Needs_Dog_Owner
+:Special_Needs_Dog_Owner rdf:type owl:Class ;
+                         rdfs:subClassOf :Owner ;
+                         rdfs:comment "Represents owners of dogs with special needs, such as health conditions or disabilities." ;
+                         rdfs:label "Special Needs Dog Owner" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Sports_Activity
+:Sports_Activity rdf:type owl:Class ;
+                 rdfs:comment "Represents different types of sports and activities in which dogs can participate, such as agility or frisbee." ;
+                 rdfs:label "Sports Activities" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Sports_Enthusiast_Owner
+:Sports_Enthusiast_Owner rdf:type owl:Class ;
+                         rdfs:subClassOf :Owner ;
+                         rdfs:comment "Represents owners who are actively involved in canine sports and enjoy training their dogs for such activities." ;
+                         rdfs:label "Sports Enthusiast Owner" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Swimming
+:Swimming rdf:type owl:Class ;
+          rdfs:subClassOf :Sports_Activity ;
+          rdfs:comment "Represents a physical activity where dogs swim, used for exercise or rehabilitation." ;
+          rdfs:label "Swimming" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Tracking
+:Tracking rdf:type owl:Class ;
+          rdfs:subClassOf :Sports_Activity ;
+          rdfs:comment "Represents an activity where dogs follow a scent trail, often used in search and rescue." ;
+          rdfs:label "Tracking" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Trainer
+:Trainer rdf:type owl:Class ;
+         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                           owl:onProperty :hasExperience ;
+                           owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onDataRange xsd:int
+                         ] ;
+         rdfs:comment "Represents individuals who provide professional training services to dogs, helping them develop specific skills" ;
+         rdfs:label "Trainers" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Training_Session
+:Training_Session rdf:type owl:Class ;
+                  rdfs:subClassOf :Event ;
+                  rdfs:comment "Represents a scheduled time for structured training activities with dogs." ;
+                  rdfs:label "Training Session" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Training_venue
+:Training_venue rdf:type owl:Class ;
+                owl:disjointUnionOf ( :Indoor
+                                      :Outdoor
+                                    ) ;
+                rdfs:comment "Represents physical locations where dogs are trained or participate in activities, such as indoor centers or outdoor fields." ;
+                rdfs:label "Training Venues" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Treibball
+:Treibball rdf:type owl:Class ;
+           rdfs:subClassOf :Sports_Activity ;
+           rdfs:comment "Represents a sport where dogs push large balls into a goal, simulating herding behavior." ;
+           rdfs:label "Treibball" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Vizsla
+:Vizsla rdf:type owl:Class ;
+        rdfs:subClassOf :Dog ;
+        rdfs:comment "A medium-sized hunting breed, known for its affectionate nature and strong bond with its owner." ;
+        rdfs:label "Vizsla" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Weight_Pulling
+:Weight_Pulling rdf:type owl:Class ;
+                rdfs:subClassOf :Sports_Activity ;
+                rdfs:comment "Represents a strength-based sport where dogs pull weighted carts, testing their power." ;
+                rdfs:label "Weight Pulling" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Weimaraner
+:Weimaraner rdf:type owl:Class ;
+            rdfs:subClassOf :Dog ;
+            rdfs:comment "A medium-to-large hunting breed, known for its sleek silver coat, originally bred in Germany for hunting large game." ;
+            rdfs:label "Weimaraner" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/Workshop
+:Workshop rdf:type owl:Class ;
+          rdfs:subClassOf :Event ;
+          rdfs:comment "Represents a hands-on event aimed at teaching specific skills related to dogs." ;
+          rdfs:label "Workshop" .
+
+
+###  http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect/half-breed
+:half-breed rdf:type owl:Class ;
+            rdfs:subClassOf :Dog ;
+            rdfs:comment "Mixed-breed dogs that combine characteristics of two or more pure breeds." ;
+            rdfs:label "Half-breed" .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi

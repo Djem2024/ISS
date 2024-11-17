@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <uri id="Imports Wizard Entry" name="http://www.semanticweb.org/djem/ontologies/2024/9/DogSportConnect" uri="A1_Kulikieva_%2012340251_Ontology.ttl"/>
+    <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
+        <uri id="Automatically generated entry, Timestamp=1730627243993" name="http://www.semanticweb.org/djem/ontologies/2024/9/untitled-ontology-2/" uri="Untitled.rdf"/>
+    </group>
+</catalog>
